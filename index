@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gimnasio de Feedback Interactivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .workout-screen {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 30px;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.5s linear;
+        }
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div id="app" class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <!-- Pantalla Principal -->
+        <div id="main-screen">
+            <header class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-indigo-600">Gimnasio de Feedback</h1>
+                <p class="mt-4 text-lg text-gray-600">Elige tu rutina y entrena tus habilidades de comunicación.</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1: Principios Básicos -->
+                <div id="btn-warmup" class="card bg-white p-8 rounded-xl shadow-lg cursor-pointer border border-gray-200">
+                    <div class="text-center">
+                        <i class="fas fa-heartbeat text-4xl text-amber-500 mb-4"></i>
+                        <h2 class="text-2xl font-semibold mb-2">Calentamiento</h2>
+                        <p class="text-gray-600">Revisa los principios clave para un feedback efectivo.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Modelo SCI -->
+                <div id="btn-sci" class="card bg-white p-8 rounded-xl shadow-lg cursor-pointer border border-gray-200">
+                    <div class="text-center">
+                        <i class="fas fa-dumbbell text-4xl text-sky-500 mb-4"></i>
+                        <h2 class="text-2xl font-semibold mb-2">Modelo S-C-I</h2>
+                        <p class="text-gray-600">Aprende a estructurar tu feedback de forma clara y objetiva.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Recibir Feedback -->
+                <div id="btn-receiving" class="card bg-white p-8 rounded-xl shadow-lg cursor-pointer border border-gray-200">
+                    <div class="text-center">
+                        <i class="fas fa-shield-alt text-4xl text-teal-500 mb-4"></i>
+                        <h2 class="text-2xl font-semibold mb-2">Recibir Feedback</h2>
+                        <p class="text-gray-600">Entrena tu habilidad para recibir feedback sin defensas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla de Calentamiento -->
+        <div id="warmup-screen" class="workout-screen">
+            <button class="home-btn mb-8 text-indigo-600 hover:text-indigo-800 font-semibold"><i class="fas fa-arrow-left mr-2"></i> Volver al menú</button>
+            <h2 class="text-3xl font-bold text-amber-600 mb-6">Calentamiento: Principios Clave</h2>
+            <div class="bg-white p-8 rounded-lg shadow-md space-y-6">
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-2xl text-amber-500 mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-lg">Mentalidad de Crecimiento</h3>
+                        <p class="text-gray-700">El feedback no es una crítica, es un regalo para mejorar.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-2xl text-amber-500 mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-lg">Sé Específico</h3>
+                        <p class="text-gray-700">Evita generalidades. Habla de situaciones y comportamientos concretos.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-2xl text-amber-500 mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-lg">Enfócate en el Comportamiento</h3>
+                        <p class="text-gray-700">Describe lo que la persona <span class="font-bold">hizo</span>, no lo que la persona <span class="font-bold">es</span>.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-2xl text-amber-500 mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-lg">Sé Oportuno</h3>
+                        <p class="text-gray-700">El feedback es más efectivo cuando se da cerca del evento.</p>
+                    </div>
+                </div>
+                 <div class="flex items-start">
+                    <i class="fas fa-check-circle text-2xl text-amber-500 mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-lg">Intención Positiva</h3>
+                        <p class="text-gray-700">Tu objetivo siempre debe ser ayudar a la otra persona a crecer y tener éxito.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla del Modelo SCI -->
+        <div id="sci-screen" class="workout-screen">
+            <button class="home-btn mb-8 text-indigo-600 hover:text-indigo-800 font-semibold"><i class="fas fa-arrow-left mr-2"></i> Volver al menú</button>
+            <h2 class="text-3xl font-bold text-sky-600 mb-2">Entrenamiento: Modelo S-C-I</h2>
+            <p class="text-gray-600 mb-6">Usa esta herramienta para construir un feedback claro y constructivo.</p>
+            
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <div class="space-y-6">
+                    <div>
+                        <label for="sci-situation" class="block text-lg font-semibold text-gray-700 mb-2">S - Situación <span class="text-sm font-normal text-gray-500">(¿Cuándo y dónde?)</span></label>
+                        <input type="text" id="sci-situation" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="Ej: En la reunión de equipo de esta mañana...">
+                    </div>
+                    <div>
+                        <label for="sci-behavior" class="block text-lg font-semibold text-gray-700 mb-2">C - Comportamiento <span class="text-sm font-normal text-gray-500">(¿Qué acción específica observaste?)</span></label>
+                        <textarea id="sci-behavior" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="Ej: ...noté que interrumpiste a Carlos cuando presentaba sus ideas."></textarea>
+                    </div>
+                    <div>
+                        <label for="sci-impact" class="block text-lg font-semibold text-gray-700 mb-2">I - Impacto <span class="text-sm font-normal text-gray-500">(¿Qué efecto tuvo en ti, el equipo o el proyecto?)</span></label>
+                        <textarea id="sci-impact" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="Ej: El impacto fue que Carlos no pudo terminar su punto y la dinámica del equipo se sintió tensa."></textarea>
+                    </div>
+                </div>
+
+                <button id="generate-sci" class="mt-8 w-full bg-sky-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-sky-700 transition-colors duration-300">
+                    <i class="fas fa-cogs mr-2"></i> Generar Guion de Feedback
+                </button>
+
+                <div id="sci-result-container" class="mt-8 p-6 bg-gray-100 rounded-lg" style="display: none;">
+                    <h3 class="text-xl font-semibold mb-4">Tu Guion de Feedback:</h3>
+                    <p id="sci-result" class="text-gray-800 leading-relaxed"></p>
+                    <button id="copy-sci" class="mt-4 bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 transition-colors duration-300 text-sm">
+                        <i class="fas fa-copy mr-2"></i> Copiar al Portapapeles
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla de Recibir Feedback -->
+        <div id="receiving-screen" class="workout-screen">
+             <button class="home-btn mb-8 text-indigo-600 hover:text-indigo-800 font-semibold"><i class="fas fa-arrow-left mr-2"></i> Volver al menú</button>
+            <h2 class="text-3xl font-bold text-teal-600 mb-6">Entrenamiento: Recibir Feedback</h2>
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <p class="mb-6 text-gray-600">La próxima vez que recibas feedback, practica estos pasos para maximizar su valor y mantener una actitud constructiva.</p>
+                <ul class="space-y-6">
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-teal-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">1</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Escucha para Entender, no para Responder</h3>
+                            <p class="text-gray-700">Concéntrate plenamente en lo que la otra persona está diciendo. Evita formular tu defensa mentalmente mientras escuchas.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-teal-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">2</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Respira y Controla tu Reacción Inicial</h3>
+                            <p class="text-gray-700">Es natural sentirse a la defensiva. Toma una respiración profunda para calmarte antes de responder.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-teal-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">3</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Haz Preguntas para Aclarar</h3>
+                            <p class="text-gray-700">Asegúrate de entender completamente. Usa frases como: <em class="text-gray-900">"¿Puedes darme un ejemplo específico?"</em> o <em class="text-gray-900">"Para asegurarme de que entiendo, lo que dices es que..."</em></p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-teal-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">4</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Agradece el Feedback</h3>
+                            <p class="text-gray-700">Reconoce el valor y la valentía que se necesita para dar feedback. Un simple <em class="text-gray-900">"Gracias por tomarte el tiempo para decirme esto"</em> es muy poderoso.</p>
+                        </div>
+                    </li>
+                     <li class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-teal-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">5</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Tómate Tiempo para Reflexionar</h3>
+                            <p class="text-gray-700">No necesitas dar una solución de inmediato. Es válido decir: <em class="text-gray-900">"Necesito procesar esto. ¿Podemos hablarlo más tarde?"</em></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Mensaje copiado</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainScreen = document.getElementById('main-screen');
+            const warmupScreen = document.getElementById('warmup-screen');
+            const sciScreen = document.getElementById('sci-screen');
+            const receivingScreen = document.getElementById('receiving-screen');
+            const workoutScreens = document.querySelectorAll('.workout-screen');
+
+            const btnWarmup = document.getElementById('btn-warmup');
+            const btnSci = document.getElementById('btn-sci');
+            const btnReceiving = document.getElementById('btn-receiving');
+            const homeBtns = document.querySelectorAll('.home-btn');
+
+            // Función para cambiar de pantalla
+            const showScreen = (screen) => {
+                mainScreen.style.display = 'none';
+                workoutScreens.forEach(s => s.style.display = 'none');
+                screen.style.display = 'block';
+            };
+
+            // Event listeners para los botones del menú principal
+            btnWarmup.addEventListener('click', () => showScreen(warmupScreen));
+            btnSci.addEventListener('click', () => showScreen(sciScreen));
+            btnReceiving.addEventListener('click', () => showScreen(receivingScreen));
+
+            // Event listeners para los botones de "volver"
+            homeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    workoutScreens.forEach(s => s.style.display = 'none');
+                    mainScreen.style.display = 'block';
+                });
+            });
+
+            // Lógica para el Modelo SCI
+            const generateSciBtn = document.getElementById('generate-sci');
+            const sciResultContainer = document.getElementById('sci-result-container');
+            const sciResultEl = document.getElementById('sci-result');
+            const copySciBtn = document.getElementById('copy-sci');
+
+            generateSciBtn.addEventListener('click', () => {
+                const situation = document.getElementById('sci-situation').value.trim();
+                const behavior = document.getElementById('sci-behavior').value.trim();
+                const impact = document.getElementById('sci-impact').value.trim();
+
+                if (situation && behavior && impact) {
+                    sciResultEl.innerHTML = `<span class="font-semibold">Situación:</span> "${situation}"<br><br>
+                                           <span class="font-semibold">Comportamiento:</span> "${behavior}"<br><br>
+                                           <span class="font-semibold">Impacto:</span> "${impact}"`;
+                    sciResultContainer.style.display = 'block';
+                } else {
+                    alert('Por favor, completa todos los campos para generar el guion.');
+                }
+            });
+
+            // Lógica para copiar al portapapeles
+            copySciBtn.addEventListener('click', () => {
+                const textToCopy = sciResultEl.innerText;
+                
+                // Crea un elemento de texto temporal para copiar
+                const tempTextArea = document.createElement('textarea');
+                tempTextArea.value = textToCopy;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('¡Guion copiado!');
+                } catch (err) {
+                    showToast('Error al copiar');
+                    console.error('Error al copiar texto: ', err);
+                }
+                document.body.removeChild(tempTextArea);
+            });
+            
+            // Función para mostrar notificación (toast)
+            function showToast(message) {
+                const toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
